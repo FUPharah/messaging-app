@@ -1,4 +1,5 @@
 import { DiCssdeck } from 'react-icons/di';
+import AuthForm from './components/AuthForm';
 
 export default function Home() {
   return (
@@ -11,14 +12,16 @@ export default function Home() {
         <DiCssdeck size="4rem"
           height="48"
           width="48"
-          className="mx-auto w-auto"
+          className="mx-auto w-auto
+          text-indigo-600"
         />
         <h2 className=" mt-6 text-center text-3xl font-bold
           tracking-tight text-gray-900">
             Sign In
         </h2>
       </div>
-      {/* AuthForm */}
+      <AuthForm />
+
     </div>
   )
 }
