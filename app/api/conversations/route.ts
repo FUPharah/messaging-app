@@ -14,12 +14,11 @@ export async function POST(
       members,
       name,
     } = body;
-
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
-    if ( isGroup && ( !members || !name || members.length < 2 )) {
+    if ( isGroup && ( !members || !name || members.length < 2 )) { 
       return new NextResponse('Bad Request', { status: 400 })
     }
 
