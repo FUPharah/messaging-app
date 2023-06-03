@@ -1,12 +1,12 @@
 'use client'
 import Avatar from "@/app/components/Avatar";
-import Modal from "@/app/components/Modal";
 import useOtherUser from "@/app/hooks/useOtherUser";
 import { Dialog, Transition } from "@headlessui/react";
 import { Conversation, User } from "@prisma/client";
 import { format } from "date-fns";
 import { Fragment, useMemo, useState } from "react";
 import { IoClose, IoTrash } from "react-icons/io5";
+import ConfirmModal from "./ConfirmModal";
 
 interface ProfileDrawerProps {
   isOpen: boolean;
@@ -22,7 +22,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
   data
 }) => {
   const otherUser = useOtherUser(data);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const joinedDate = useMemo(() => {
     return format(new Date(otherUser.createdAt), 'PP')
   }, [otherUser.createdAt]);
@@ -40,13 +40,10 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
   },[data])
   return (
   <>
-    <Modal
-      isOpen={isModalOpen}
-      onClose={() => setIsModalOpen(false)}>
-        <div className="bg-white-p5">
-          <p>Modal!</p>
-        </div>
-    </Modal>
+    <ConfirmModal
+    isOpen={confirmOpen}
+    onClose={() => setConfirmOpen(false)}
+    />
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={onClose}>
         <Transition.Child as={Fragment} enter="ease-out duration-500"
@@ -85,8 +82,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                         {statusText}
                       </div>
                       <div className="flex gap-10 my-8">
-                        <div onClick={() => setIsModalOpen(true)} className="flex flex-col gap-3 items-center
-                        cursor-pointer hover:opacity-75">
+                        <div onClick={() => setConfirmOpen(true)} className="flex flex-col gap-3 items-center
+                          cursor-pointer hover:opacity-75">
                           <div className="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center">
                             <IoTrash size={24} className="text-neutral-500"/>
                           </div>
