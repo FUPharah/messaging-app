@@ -5,10 +5,16 @@ interface AvatarGroupProps {
   users?: User[];
 }
 
+type PositionMap = {
+  [key: number]: {
+    [key: number]: string;
+  };
+};
+
 const AvatarGroup: React.FC<AvatarGroupProps> = ({
   users = []
 }) => {
-  const positionMap = {
+  const positionMap: PositionMap = {
     3: {
       0: 'top-0 left-[12px]',
       1: 'bottom-0',
@@ -31,7 +37,7 @@ const AvatarGroup: React.FC<AvatarGroupProps> = ({
         <div
           key={user.id}
           className={`absolute inline-block rounded-full overflow-hidden h-[21px] w-[21px] ${
-            positionMap[numUsers as keyof typeof positionMap][index as keyof typeof positionMap[typeof numUsers]]
+            positionMap[numUsers][index]
           }`}
         >
           <Image
