@@ -6,7 +6,7 @@ interface MobileItemProps {
   href: string;
   icon: any;
   active?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const MobileItem: React.FC<MobileItemProps> = ({
