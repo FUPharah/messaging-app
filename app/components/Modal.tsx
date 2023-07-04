@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 
 interface ModalProps {
   isOpen?: boolean;
-  onClose?: () => void;
+  onClose: () => void;
   children: React.ReactNode;
 }
 
